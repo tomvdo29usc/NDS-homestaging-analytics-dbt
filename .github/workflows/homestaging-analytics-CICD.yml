@@ -38,7 +38,7 @@ jobs:
                 location: US-WEST1
                 type: bigquery
                 method: service-account
-                project: ${{ secrets.DBT_PROJECT }}
+                project: data-438623
                 threads: 1
                 keyfile: ~/keyfile.json
                 location: US
