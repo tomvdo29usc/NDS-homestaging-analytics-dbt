@@ -1,0 +1,42 @@
+name: dbt CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  run-dbt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install dbt-bigquery
+
+      - name: Configure DBT profile
+        run: |
+          mkdir -p ~/.dbt
+          echo "$DBT_KEYFILE_JSON" > ~/keyfile.json
+          echo "my_profile:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: your-gcp-project
+      dataset: your_dataset
+      threads: 4
+      keyfile: ~/keyfile.json
+      location: US" > ~/.dbt/profiles.yml
+
+      - name: Run dbt
+        run: dbt run
