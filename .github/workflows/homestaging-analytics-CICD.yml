@@ -25,7 +25,7 @@ jobs:
         run: |
           mkdir -p ~/.dbt
           
-          echo '${{ secrets.DBT_USER_CREDS }}' > ~/keyfile.json
+          echo '${{ secrets.DBT_USER_CREDS }}' > ~/profiles.json
           
           cat <<EOF > ~/.dbt/profiles.yml
           homestaging_analytics:
@@ -40,7 +40,7 @@ jobs:
                 method: service-account
                 project: data-438623
                 threads: 1
-                keyfile: ~/keyfile.json
+                keyfile: /home/runner/profiles.json
                 location: US
           EOF
 
