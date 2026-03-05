@@ -43,7 +43,6 @@ jobs:
                 keyfile: /home/runner/profiles.json
           EOF
 
-      - name: Run dbt
+      - name: Build dbt
         run: |
-          dbt run
-          dbt test
+          dbt build
