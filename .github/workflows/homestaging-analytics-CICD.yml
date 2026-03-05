@@ -32,16 +32,15 @@ jobs:
             target: prod
             outputs:
               prod:
-                dataset: StagingOrders
+                dataset: ${{ vars.BQ_HOMESTAGINGANALYTICS_DATASET }}
                 job_execution_timeout_seconds: 300
                 job_retries: 1
-                location: US-WEST1
+                location: ${{ vars.BQ_HOMESTAGINGANALYTICS_LOCATION }}
                 type: bigquery
                 method: service-account
-                project: data-438623
+                project: ${{ vars.BQ_HOMESTAGINGANALYTICS_PROJECT }}
                 threads: 1
                 keyfile: /home/runner/profiles.json
-                location: US
           EOF
 
       - name: Run dbt
