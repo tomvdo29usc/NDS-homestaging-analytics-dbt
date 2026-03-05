@@ -1,42 +1,51 @@
-name: dbt CI/CD
+name: dbt CI
 
 on:
   push:
-    branches: [main]
-  pull_request:
+    branches: [ main ]
 
 jobs:
-  run-dbt:
+  dbt-run:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: Install Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
-      - name: Install dependencies
+      - name: Install dbt
         run: |
-          python -m pip install --upgrade pip
           pip install dbt-bigquery
 
-      - name: Configure DBT profile
+      - name: Create dbt profile
         run: |
           mkdir -p ~/.dbt
-          echo "$DBT_KEYFILE_JSON" > ~/keyfile.json
-          echo "my_profile:
-  target: dev
-  outputs:
-    dev:
-      type: bigquery
-      method: service-account
-      project: your-gcp-project
-      dataset: your_dataset
-      threads: 4
-      keyfile: ~/keyfile.json
-      location: US" > ~/.dbt/profiles.yml
+          
+          echo '${{ secrets.DBT_USER_CREDS }}' > ~/keyfile.json
+          
+          cat <<EOF > ~/.dbt/profiles.yml
+          homestaging_analytics:
+            target: prod
+            outputs:
+              prod:
+                dataset: StagingOrders
+                job_execution_timeout_seconds: 300
+                job_retries: 1
+                location: US-WEST1
+                type: bigquery
+                method: service-account
+                project: ${{ secrets.DBT_PROJECT }}
+                threads: 1
+                keyfile: ~/keyfile.json
+                location: US
+          EOF
 
       - name: Run dbt
-        run: dbt run
+        run: |
+          dbt deps
+          dbt run
+          dbt test
