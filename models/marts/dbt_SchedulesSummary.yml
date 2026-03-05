@@ -1,0 +1,21 @@
+models:
+  - name: dbt_SchedulesSummary
+    description: Summary of all schedules like Staging, Pickup, and Walkthru
+    columns:
+      - name: YearMonth
+        description: Year Month level
+        data_tests:
+          - not_null
+
+      - name: YearMonthDay
+        description: Year Month Day level
+        data_tests:
+          - not_null
+
+      - name: Type
+        description: Type of events
+        data_tests:
+          - not_null
+
+      - name: Total_Schedules
+        description: Total schedules

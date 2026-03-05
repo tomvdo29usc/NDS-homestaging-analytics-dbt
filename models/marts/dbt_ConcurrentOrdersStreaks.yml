@@ -1,0 +1,22 @@
+models:
+  - name: dbt_ConcurrentOrdersStreaks
+    description: Tracks the number of concurrent staging orders per day and identifies consecutive streaks of the same order count, helping analyze workload patterns and peak capacity periods.
+    columns:
+      - name: number_of_concurrent_orders
+        description: The total number of staging orders active on a given day within the period
+          - not_null
+
+      - name: start_date
+        description: Start date of the period
+        data_tests:
+          - not_null
+
+      - name: end_date
+        description: End date of the period
+        data_tests:
+          - not_null
+
+      - name: consecutive_duration_days
+        description: Total length of the given period
+        data_tests:
+          - not_null

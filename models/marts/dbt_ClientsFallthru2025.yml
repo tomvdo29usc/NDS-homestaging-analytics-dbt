@@ -1,0 +1,22 @@
+models:
+  - name: dbt_ClientsFallthru2025
+    description: Reports felt-thru client 2025, number of felt-thru clients in 2024, and number of inquiries in 2025
+    columns:
+      - name: client_fallthru_2025
+        description: Name of clients who felt thru in 2025
+          - not_null
+
+      - name: client_type
+        description: Type of fallthru whether new, paid last year, or feltthru last year
+        data_tests:
+          - not_null
+
+      - name: inquiry_count_2025
+        description: Number of inquiries in 2025
+        data_tests:
+          - not_null
+
+      - name: count_2024_fallthru_clients
+        description: Number of clients who felt-thru in 2024
+        data_tests:
+          - not_null

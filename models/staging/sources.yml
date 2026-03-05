@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: StagingOrders
+    database: data-438623         # your GCP project
+    schema: StagingOrders          # your BigQuery dataset
+    tables:
+      - name: Listing_History
+        description: Listing statuses for each MLS associated with a staging order
+      - name: Orders
+        description: All staging inquiries (Inquiry, Active, Archived, or Completed)
+      - name: All_Schedules
+        description: All schedules

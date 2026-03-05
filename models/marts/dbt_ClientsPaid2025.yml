@@ -1,0 +1,17 @@
+models:
+  - name: dbt_ClientsPaid2025
+    description: Reports felt-thru client 2025, number of felt-thru clients in 2024, and number of inquiries in 2025
+    columns:
+      - name: client_2025
+        description: Name of clients who were converted in 2025
+          - not_null
+
+      - name: client_type
+        description: Type of paid client whether new or returning from 2024
+        data_tests:
+          - not_null
+
+      - name: count_2024_clients
+        description: Number of converted clients in 2024
+        data_tests:
+          - not_null

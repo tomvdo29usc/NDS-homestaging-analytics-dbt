@@ -1,0 +1,124 @@
+models:
+  - name: dbt_StagingOrderswithListingStatuses
+    description: All inquires data with Redfin Listing Status columns
+    columns: 
+
+      - name: Order_ID
+        description: ID of an inquiry
+        data_tests:
+          - not_null
+          - unique
+        
+      - name: Request_Submitted
+        description: Date and time a staging inquiry was submitted by user
+        data_tests:
+          - not_null
+
+      - name: Client_Name
+        description: Name of the client submiited the inquiry
+        data_tests:
+          - not_null
+      
+      - name: Property_Address
+        description: Address of propery of the inquiry
+        data_tests:
+          - not_null
+
+      - name: Property_Description
+        description: Description of the property
+
+      - name: Media_Request
+        description: Media items the client requested
+
+      - name: Contract_Duration
+        description: Duration of the contract
+        data_tests:
+          - not_null
+        
+      - name: Extended
+        description: Duration of the contract extension
+
+      - name: Schedule_Staging_Date
+        description: Date staging installation was scheduled
+
+      - name: Schedule_Staging_Time
+        description: Time staging installation was scheduled
+
+      - name: End_Date
+        description: End date of staging contract
+
+      - name: Paid
+        description: Indication whether the inquiry has been paid
+
+      - name: Status
+        description: Current status of the inquiry
+
+      - name: Schedule_Pickup_Date
+        description: Date staging pickup was scheduled
+
+      - name: Schedule_Pickup_Time
+        description: Time staging pickup was scheduled
+
+      - name: Updated_End_Date
+        description: Date the staging inquiry officially ended
+
+      - name: Listing_Status
+        description: The most current updated listing status
+
+      - name: Listing_Updated
+        description: Most current date and time the listing is updated on Redfin
+
+      - name: Last_Listing_Status
+        description: The last most current updated listing status
+
+      - name: Listing_Retrieved
+        description: Most current date and time Redfin pipeline retrieved the listing status
+
+      - name: Current_Price
+        description: The most current price of the listing
+
+      - name: MLS
+        description: MLS number of the listing
+
+      - name: Archive_Reason
+        description: Reason why the inquiry was archived
+
+      - name: Payment_Amount
+        description: Revenue earned from the inquiry
+      
+      - name: Distance
+        description: Distance (miles) from the property address to warehouse
+      
+      - name: Duration_Warehouse_Client
+        description: Estimated travel time from the property address to warehouse
+
+      - name: Listing_First_Active
+        description: Date when the listing was first active
+
+      - name: Listing_First_Contingent
+        description: Date when the listing was first contingent
+
+      - name: Listing_First_Pending
+        description: Date when the listing was first Pending
+
+      - name: Listing_Sold
+        description: Date when the listing was Sold
+
+      - name: First_Listed_Price
+        description: Asked price when the listing was first listed
+
+      - name: Sold_Price
+        description: Closed price when the listing was sold
+
+      - name: most_recent_First_Listed_Price
+        description: Price of the listing if Relisted
+
+      - name: Pickup_Complete
+        description: Boolean whether pickup is completed
+
+      - name: Unknown_Outcome
+        description: The listing outcome is unclear
+      
+
+      
+      

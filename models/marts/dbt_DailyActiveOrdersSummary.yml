@@ -1,0 +1,23 @@
+models:
+  - name: dbt_DailyActiveOrdersSummary
+    description: Summary of active staged inquiries and 30-day window potential leads
+    columns:
+      - name: day_mark
+        description: Date
+        data_tests:
+          - not_null
+
+      - name: active_orders_count
+        description: Number of active orders on the given day
+        data_tests:
+          - not_null
+
+      - name: count_potential_within_30days
+        description: Number of lead inquiries received within 30 days from the given day
+        data_tests:
+          - not_null
+
+      - name: active_plus_potential
+        description: Total of active and lead
+        data_tests:
+          - not_null

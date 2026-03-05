@@ -1,0 +1,28 @@
+models:
+  - name: dbt_ListingStatusConversionCurve
+    description: Summary of By day X, what percentage of staged listings have gone contingent, pending, or closed?
+    columns:
+      - name: day
+        description: number of days passed by
+        data_tests:
+          - not_null
+
+      - name: pct_contingent
+        description: Percentage of staged listings reached contingent
+        data_tests:
+          - not_null
+
+      - name: pct_pending
+        description: Percentage of staged listings reached pending
+        data_tests:
+          - not_null
+
+      - name: pct_closed
+        description: Percentage of staged listings reached closed or sold
+        data_tests:
+          - not_null
+
+      - name: num_orders
+        description: number of orders received an offer
+        data_tests:
+          - not_null
