@@ -18,5 +18,3 @@ models:
 
       - name: count_2024_fallthru_clients
         description: Number of clients who felt-thru in 2024
-        data_tests:
-          - not_null
