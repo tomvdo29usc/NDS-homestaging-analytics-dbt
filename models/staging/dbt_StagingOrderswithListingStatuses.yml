@@ -38,6 +38,11 @@ models:
       - name: Extended
         description: Duration of the contract extension
 
+      - name: Stage_Before
+        description: Date the client requested staging before
+        data_tests:
+          - not_null
+
       - name: Schedule_Staging_Date
         description: Date staging installation was scheduled
 

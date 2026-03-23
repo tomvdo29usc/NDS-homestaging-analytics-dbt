@@ -40,6 +40,7 @@ SELECT
     ord.Media_Request,
     ord.Contract_Duration,
     ord.Extended,
+    ord.Request_to_Stage_Before AS Stage_Before,
     ord.Schedule_Staging_Date,
     ord.Schedule_Staging_Time,
     ord.End_Date,
