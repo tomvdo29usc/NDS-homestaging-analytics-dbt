@@ -30,7 +30,7 @@ WITH statuses AS (
       FROM UNNEST(events)
       WHERE Event IN ('Listed', 'Price Changed')
         AND Date < (
-          SELECT MIN(Date)
+          SELECT MAX(Date)
           FROM UNNEST(events)
           WHERE Event = 'Relisted'
         )
