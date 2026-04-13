@@ -4,11 +4,19 @@ WITH statuses AS (
   SELECT
     MLS,
 
-    (SELECT MIN(Date) FROM UNNEST(events) WHERE Event = 'Listed') AS Listing_First_Active,
+    (SELECT MAX(Date) FROM UNNEST(events) WHERE Event = 'Listed') AS Listing_First_Active,
 
     (SELECT MIN(Date) FROM UNNEST(events) WHERE Event = 'Contingent') AS Listing_First_Contingent,
 
     (SELECT MIN(Date) FROM UNNEST(events) WHERE Event = 'Pending') AS Listing_First_Pending,
+
+    (SELECT MAX(Date) FROM UNNEST(events) WHERE Event = 'Relisted') AS Listing_Relisted,
+
+    (SELECT MAX(Date) FROM UNNEST(events) WHERE Event = 'Contingent') AS Listing_Last_Contingent,
+
+    (SELECT MAX(Date) FROM UNNEST(events) WHERE Event = 'Pending') AS Listing_Last_Pending,
+
+    (SELECT MAX(Date) FROM UNNEST(events) WHERE Event = 'Price Changed') AS Listing_Last_PriceChanged,
 
     (SELECT MIN(Date) FROM UNNEST(events) WHERE Event = 'Sold') AS Listing_Sold,
 
@@ -16,6 +24,24 @@ WITH statuses AS (
      WHERE Event = 'Listed'
      ORDER BY Date ASC
      LIMIT 1) AS INT64) AS First_Listed_Price,
+
+     CAST((
+      SELECT Price
+      FROM UNNEST(events)
+      WHERE Event IN ('Listed', 'Price Changed')
+        AND Date < (
+          SELECT MIN(Date)
+          FROM UNNEST(events)
+          WHERE Event = 'Relisted'
+        )
+      ORDER BY Date DESC
+      LIMIT 1
+    ) AS INT64) AS Pre_Relisted_Price,
+
+    CAST((SELECT Price FROM UNNEST(events)
+     WHERE Event IN ('Price Changed', 'Listed')
+     ORDER BY Date DESC
+     LIMIT 1) AS INT64) AS Last_Asked_Price,
 
     (SELECT Price FROM UNNEST(events)
      WHERE Event = 'Sold'
@@ -64,8 +90,14 @@ SELECT
     sts.Listing_First_Active,
     sts.Listing_First_Contingent,
     sts.Listing_First_Pending,
+    sts.Listing_Relisted,
+    sts.Listing_Last_Contingent,
+    sts.Listing_Last_Pending,
+    Listing_Last_PriceChanged,
     sts.Listing_Sold,
     First_Listed_Price,
+    COALESCE(Pre_Relisted_Price, First_Listed_Price) AS Pre_Relisted_Price,
+    Last_Asked_Price,
     CAST(sts.Sold_Price AS INT64) AS Sold_Price,
     (   SELECT SUM(First_Listed_Price) 
         FROM statuses 

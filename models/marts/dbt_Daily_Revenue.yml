@@ -1,0 +1,17 @@
+models:
+  - name: dbt_Daily_Revenue
+    description: Track daily earned revenue
+    columns:
+      - name: period
+        description: Label of earned or future
+          - not_null
+
+      - name: date
+        description: date 
+        data_tests:
+          - not_null
+
+      - name: total_daily_revenue
+        description: Total daily revenue
+        data_tests:
+          - not_null

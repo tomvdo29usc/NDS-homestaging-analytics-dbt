@@ -104,6 +104,18 @@ models:
       - name: Listing_First_Pending
         description: Date when the listing was first Pending
 
+      - name: Listing_Relisted
+        description: Date when the listing was relisted
+
+      - name: Listing_Last_Contingent
+        description: Date when the listing was contingent before it was sold
+
+      - name: Listing_Last_Pending
+        description: Date when the listing was sold before it was sold
+
+      - name: Listing_Last_PriceChanged
+        description: Date when the listing changed price before it was sold
+
       - name: Listing_Sold
         description: Date when the listing was Sold
 
@@ -115,6 +127,12 @@ models:
 
       - name: most_recent_First_Listed_Price
         description: Price of the listing if Relisted
+
+      - name: Pre_Relisted_Price
+        description: Last price before the property was relisted
+
+      - name: Last_Asked_Price
+        description: Final asked price before it was pending
 
       - name: Pickup_Complete
         description: Boolean whether pickup is completed
