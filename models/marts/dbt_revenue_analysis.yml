@@ -1,0 +1,24 @@
+models:
+  - name: dbt_Revenue_Analysis
+    description: Track revenue of each staging order
+    columns:
+      - name: Order_ID
+        description: Order ID
+          - not_null
+
+      - name: date_revenue
+        description: staging date when the revenue is official earned
+        data_tests:
+          - not_null
+
+      - name: Earning_Amount
+        description: Revenue Amount (Paid and Staged)
+      
+      - name: OutstandingQuote_Amount
+        description: Quote Amount for staging order that is not converted yet
+
+      - name: PendingEarning_Amount
+        description: Revenue Amount when order is paid or converted but not yet staged
+
+      - name: Lost_Revenue
+        description: Quote Amount when client didn't move forward with staging (archived)

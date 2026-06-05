@@ -1,17 +1,39 @@
 models:
   - name: dbt_Daily_Revenue
-    description: Track daily earned revenue
+    description: Track daily accrual revenue
     columns:
-      - name: period
-        description: Label of earned or future
+      - name: Period
+        description: Label of Earned or Future or Prospective
           - not_null
 
-      - name: date
+      - name: Full_Date
         description: date 
         data_tests:
           - not_null
 
-      - name: total_daily_revenue
+      - name: Total_Daily_Revenue
         description: Total daily revenue
-        data_tests:
-          - not_null
+      
+      - name: Total_Daily_Revenue_Actual
+        description: Total daily revenue actual
+
+      - name: Total_Daily_Revenue_Ideal
+        description: Total daily revenue Ideal, including prospective revenue if staged in the next 7 days
+
+      - name: Earned Daily Revenue
+        description: Total Daily Revenue earned today or in the past
+
+      - name: Future_Daily_Revenue
+        description: Total daily revenue will be earned tommorow or in the future
+
+      - name: Prospective_Daily_Revenue
+        description: Total daily revenue (only prospective quotes if staged in the next 7 days)
+
+      - name: Cum_Earned
+        description: Cummulative Earned Revenue (upto today)
+
+      - name: Cum_Future
+        description: Cummulative Revenue (cummulated earned and expanding to the future)
+
+      - name: Cum_Ideal
+        description: Cummulative Revenue (cumulated earned, future, and outstanding quote assuming to be converted in the next 7 days)
