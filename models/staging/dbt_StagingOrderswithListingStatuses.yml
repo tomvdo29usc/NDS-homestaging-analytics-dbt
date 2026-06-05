@@ -87,7 +87,16 @@ models:
         description: Reason why the inquiry was archived
 
       - name: Payment_Amount
-        description: Revenue earned from the inquiry
+        description: Revenue amount pulled from proposal
+
+      - name: Proposal_SentDate
+        description: Proposal sent date
+
+      - name: Proposal_ClosedDate
+        description: Proposal closed date
+      
+      - name: Proposal_Duration
+        description: Contract duration
       
       - name: Distance
         description: Distance (miles) from the property address to warehouse

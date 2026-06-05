@@ -83,7 +83,10 @@ SELECT
     ord.Current_Price,
     ord.MLS,
     ord.Archive_Reason,
-    ord.Payment_Amount,
+    COALESCE(ord.Payment_Amount, proposal.Quote_Price) AS Payment_Amount,
+    proposal.Sent_Date AS Proposal_SentDate,
+    proposal.Closed_Date AS Proposal_ClosedDate,
+    CASE WHEN proposal.Contract_Duration = "Unlimited Term" THEN 45 ELSE CAST(proposal.Contract_Duration AS INT64) END AS Proposal_Duration,
     ord.Distance,
     ord.Duration_Warehouse_Client,
     ord.Unknown_Outcome,
@@ -107,4 +110,6 @@ SELECT
 FROM {{ source('StagingOrders', 'Orders') }} AS ord
 LEFT JOIN statuses AS sts
     ON ord.MLS = sts.MLS
+LEFT JOIN {{ source('StagingOrders', 'Proposal') }} proposal
+  ON ord.Order_ID = proposal.Order_ID
 WHERE Client_Name <> "Tom Do"

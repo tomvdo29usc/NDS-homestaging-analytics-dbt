@@ -11,3 +11,5 @@ sources:
         description: All staging inquiries (Inquiry, Active, Archived, or Completed)
       - name: All_Schedules
         description: All schedules
+      - name: Proposal
+        description: Proposal table
