@@ -21,4 +21,4 @@ models:
         description: Revenue Amount when order is paid or converted but not yet staged
 
       - name: Lost_Revenue
-        description: Quote Amount when client didn't move forward with staging (archived)
+        description: Quote Amount when client didn't move forward with staging (archived inquiry)
