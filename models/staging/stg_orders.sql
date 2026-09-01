@@ -65,3 +65,4 @@ SELECT
     Co_Agent_Email,
     Co_Agent_Phone
 FROM {{ source('StagingOrders', 'Orders') }}
+WHERE Client_Name <> "Tom Do" AND Request_Submitted NOT NULL
