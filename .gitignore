@@ -1,4 +1,15 @@
+# local env and credentials
+../dbt-user-creds.json
+dbt-user-creds.json
+dbt-env/
 
+# OS and editor
+.DS_Store
+.idea/
+.ipynb_checkpoints/
+__pycache__/
+
+# logs and caches
 target/
-dbt_packages/
 logs/
+

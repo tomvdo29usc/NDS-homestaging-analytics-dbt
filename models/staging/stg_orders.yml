@@ -1,0 +1,159 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: Normalized staging orders data with a client key and parsed property address fields.
+    columns:
+      - name: Request_Submitted
+        description: date the order request was submitted
+
+      - name: Order_ID
+        description: unique order identifier
+        data_tests:
+          - not_null
+
+      - name: Client_Name
+        description: full client name
+
+      - name: Client_Phone
+        description: cleaned client phone number
+
+      - name: Client_ID
+        description: normalized client identifier generated as CUS + the last 10 digits of the phone number
+        data_tests:
+          - not_null
+
+      - name: Client_Email
+        description: client email address
+
+      - name: Property_Address
+        description: original property address from the source order
+
+      - name: Property_StreetAddress
+        description: street portion of the property address without city, state, and ZIP
+
+      - name: Property_City
+        description: city extracted from the property address
+
+      - name: Property_State
+        description: state extracted from the property address
+
+      - name: Property_Zipcode
+        description: ZIP or ZIP+4 extracted from the property address
+
+      - name: Property_Description
+        description: description of the property being staged
+
+      - name: Request_Description
+        description: narrative description of the client request
+
+      - name: Request_to_Stage_Before
+        description: whether the request was made before staging
+
+      - name: Media_Request
+        description: media request flag or requirement
+
+      - name: Contract_Duration
+        description: staging contract duration
+
+      - name: Extended
+        description: whether the contract was extended
+
+      - name: Schedule_Staging_Date
+        description: scheduled staging date
+
+      - name: Schedule_Staging_Time
+        description: scheduled staging time
+
+      - name: End_Date
+        description: contract end date
+
+      - name: Paid
+        description: payment status for the order
+
+      - name: Status
+        description: current status of the staging order
+
+      - name: Schedule_Pickup_Date
+        description: scheduled pickup date
+
+      - name: Schedule_Pickup_Time
+        description: scheduled pickup time
+
+      - name: Internal_Notes
+        description: internal notes related to the order
+
+      - name: User_Set_Archive
+        description: archive flag set by a user
+
+      - name: Updated_End_Date
+        description: updated end date after changes to the order
+
+      - name: Listing_URL
+        description: URL for the listing associated with the property
+
+      - name: Listing_Status
+        description: current or latest listing status
+
+      - name: Listing_Updated
+        description: timestamp when the listing was last updated
+
+      - name: MLS
+        description: MLS number for the property listing
+
+      - name: Listing_Retrieved
+        description: timestamp when the listing was retrieved
+
+      - name: Last_Listing_Status
+        description: most recent listing status value
+
+      - name: Last_Listing_Updated
+        description: last listing update timestamp
+
+      - name: Current_Price
+        description: current listing price
+
+      - name: Staging_Complete
+        description: whether staging work was completed
+
+      - name: Pickup_Complete
+        description: whether pickup was completed
+
+      - name: Archive_Reason
+        description: reason the order was archived
+
+      - name: Payment_Amount
+        description: payment amount collected for the order
+
+      - name: Unknown_Outcome
+        description: indicator for unknown outcome status
+
+      - name: Distance
+        description: distance associated with the order or property
+
+      - name: Duration_Warehouse_Client
+        description: warehouse-client duration value
+
+      - name: Owner_Name
+        description: property owner name
+
+      - name: Owner_Email
+        description: property owner email address
+
+      - name: Owner_Phone
+        description: property owner phone number
+
+      - name: ETA_Input
+        description: ETA input value recorded for the order
+
+      - name: Unlimited_Extension
+        description: whether the order has an unlimited extension
+
+      - name: Co_Agent_Name
+        description: co-agent name for the order
+
+      - name: Co_Agent_Email
+        description: co-agent email address
+
+      - name: Co_Agent_Phone
+        description: co-agent phone number
