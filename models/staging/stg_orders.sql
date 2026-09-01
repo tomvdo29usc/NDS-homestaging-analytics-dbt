@@ -65,4 +65,52 @@ SELECT
     Co_Agent_Email,
     Co_Agent_Phone
 FROM {{ source('StagingOrders', 'Orders') }}
-WHERE Client_Name <> "Tom Do" AND Request_Submitted NOT NULL
+WHERE Client_Name <> "Tom Do"
+    AND NOT (
+        Request_Submitted IS NULL
+        AND Order_ID IS NULL
+        AND Client_Name IS NULL
+        AND Client_Phone IS NULL
+        AND Client_Email IS NULL
+        AND Property_Address IS NULL
+        AND Property_Description IS NULL
+        AND Request_Description IS NULL
+        AND Request_to_Stage_Before IS NULL
+        AND Media_Request IS NULL
+        AND Contract_Duration IS NULL
+        AND Extended IS NULL
+        AND Schedule_Staging_Date IS NULL
+        AND Schedule_Staging_Time IS NULL
+        AND End_Date IS NULL
+        AND Paid IS NULL
+        AND Status IS NULL
+        AND Schedule_Pickup_Date IS NULL
+        AND Schedule_Pickup_Time IS NULL
+        AND Internal_Notes IS NULL
+        AND User_Set_Archive IS NULL
+        AND Updated_End_Date IS NULL
+        AND Listing_URL IS NULL
+        AND Listing_Status IS NULL
+        AND Listing_Updated IS NULL
+        AND MLS IS NULL
+        AND Listing_Retrieved IS NULL
+        AND Last_Listing_Status IS NULL
+        AND Last_Listing_Updated IS NULL
+        AND Current_Price IS NULL
+        AND Staging_Complete IS NULL
+        AND Pickup_Complete IS NULL
+        AND Archive_Reason IS NULL
+        AND Payment_Amount IS NULL
+        AND Unknown_Outcome IS NULL
+        AND Distance IS NULL
+        AND Duration_Warehouse_Client IS NULL
+        AND Owner_Name IS NULL
+        AND Owner_Email IS NULL
+        AND Owner_Phone IS NULL
+        AND ETA_Input IS NULL
+        AND Unlimited_Extension IS NULL
+        AND Co_Agent_Name IS NULL
+        AND Co_Agent_Email IS NULL
+        AND Co_Agent_Phone IS NULL
+    )
+    AND Request_Submitted IS NOT NULL
