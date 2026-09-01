@@ -8,6 +8,21 @@ models:
           - not_null
           - unique
 
+      - name: Status
+        description: "Order status (Inquiry, Staging Scheduling, Archived, etc.)"
+
+      - name: Client_Name
+        description: "Client name for the order"
+
+      - name: Property_Address
+        description: "Property address for the order"
+
+      - name: Payment_Amount
+        description: "Payment amount recorded for the order"
+
+      - name: Schedule_Staging_Date
+        description: "Scheduled staging date (if any)"
+
       - name: date_revenue
         description: "Staging date when the revenue is officially earned"
 
