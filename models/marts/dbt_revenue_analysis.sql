@@ -1,5 +1,10 @@
 SELECT
   Order_ID,
+  Status,
+  Client_Name,
+  Property_Address,
+  Payment_Amount,
+  Schedule_Staging_Date,
   -- full_date,
   CASE WHEN Schedule_Staging_Date IS NOT NULL THEN Schedule_Staging_Date 
        WHEN Schedule_Staging_Date IS NULL AND Status = "Archived" THEN DATE(Proposal_ClosedDate) ELSE CURRENT_DATE() END AS date_revenue,
