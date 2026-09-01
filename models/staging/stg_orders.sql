@@ -1,3 +1,4 @@
+-- Updated: 2026-09-01 — minor audit comment added
 {{ config(materialized='view') }}
 
 SELECT
@@ -6,7 +7,7 @@ SELECT
     Client_Name,
     TRIM(Client_Phone) AS Client_Phone,
     CASE
-        WHEN Client_Phone IS NULL OR TRIM(Client_Phone) = '' THEN NULL
+        WHEN Client_Phone IS NULL OR TRIM(Client_Phone) = '' THEN "ERRORCLIENTID"
         ELSE CONCAT(
             'CUS',
             RIGHT(REGEXP_REPLACE(TRIM(Client_Phone), r'[^0-9]', ''), 10)
