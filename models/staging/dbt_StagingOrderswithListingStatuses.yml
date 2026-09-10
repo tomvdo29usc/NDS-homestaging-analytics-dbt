@@ -77,9 +77,6 @@ models:
       - name: Listing_Retrieved
         description: Most current date and time Redfin pipeline retrieved the listing status
 
-      - name: Current_Price
-        description: The most current price of the listing
-
       - name: MLS
         description: MLS number of the listing
 

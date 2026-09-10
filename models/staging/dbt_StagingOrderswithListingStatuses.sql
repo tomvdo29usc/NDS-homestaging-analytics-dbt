@@ -80,7 +80,6 @@ SELECT
     ord.Listing_Updated,
     ord.Listing_Retrieved,
     ord.Last_Listing_Status,
-    ord.Current_Price,
     ord.MLS,
     ord.Archive_Reason,
     COALESCE(ord.Payment_Amount, proposal.Quote_Price) AS Payment_Amount,
