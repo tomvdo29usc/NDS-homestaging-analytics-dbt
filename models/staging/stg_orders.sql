@@ -48,7 +48,6 @@ SELECT
     Listing_Retrieved,
     Last_Listing_Status,
     Last_Listing_Updated,
-    Current_Price,
     Staging_Complete,
     Pickup_Complete,
     Archive_Reason,
