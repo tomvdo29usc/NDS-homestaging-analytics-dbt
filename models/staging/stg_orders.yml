@@ -110,9 +110,6 @@ models:
       - name: Last_Listing_Updated
         description: last listing update timestamp
 
-      - name: Current_Price
-        description: current listing price
-
       - name: Staging_Complete
         description: whether staging work was completed
 

@@ -96,7 +96,6 @@ WHERE Client_Name <> "Tom Do"
         AND Listing_Retrieved IS NULL
         AND Last_Listing_Status IS NULL
         AND Last_Listing_Updated IS NULL
-        AND Current_Price IS NULL
         AND Staging_Complete IS NULL
         AND Pickup_Complete IS NULL
         AND Archive_Reason IS NULL
