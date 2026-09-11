@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: stg_schedules
+    description: Normalized staging schedules view containing confirmed schedule records with parsed date/time fields and calculated duration in hours. Includes all schedule types associated with orders.
+    
+    columns:
+      - name: Order_ID
+        description: reference to the order associated with this schedule
+        data_tests:
+          - not_null
+
+      - name: Type
+        description: type of schedule (e.g., staging, pickup, delivery)
+        data_tests:
+          - not_null
+
+      - name: Schedule_Date
+        description: date of the scheduled event
+
+      - name: Schedule_Time
+        description: time of the scheduled event
+
+      - name: Schedule_Datetime
+        description: combined datetime field parsed from Schedule_Date and Schedule_Time in '%Y-%m-%d %H:%M:%S' format
+        data_tests:
+          - not_null
+
+      - name: Duration_Hours
+        description: calculated duration in hours, derived from parsing hours and minutes from the Duration field

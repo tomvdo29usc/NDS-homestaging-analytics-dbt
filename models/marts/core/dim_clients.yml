@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: dim_clients
+    description: Client dimension table containing deduplicated and aggregated client information. One row per unique Client_ID and Phone combination, with aggregated names and emails across all associated orders.
+    
+    meta:
+      owner: analytics
+      grain: one row per unique client ID and phone
+    
+    columns:
+      - name: Client_ID
+        description: unique client identifier generated from phone number (CUS + last 10 digits)
+        data_tests:
+          - not_null
+          - unique
+      
+      - name: Client_Phone
+        description: primary client phone number
+        data_tests:
+          - not_null
+      
+      - name: Client_Name
+        description: client name (shortest variant selected from all associated names)
+      
+      - name: Client_Emails
+        description: comma-separated list of all email addresses associated with this client
+      
+      - name: Client_Names
+        description: comma-separated list of all name variations associated with this client
