@@ -27,4 +27,4 @@ SELECT
 
 FROM distinct_clients
 GROUP BY Client_ID, Client_Phone
-ORDER BY Client_Name;
+ORDER BY Client_Name
