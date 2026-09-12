@@ -3,7 +3,7 @@ all_schedules_clean_stage1 AS (
     SELECT
         Order_ID,
         CASE WHEN Type = "Destaging" THEN "Pickup" ELSE Type END AS Type,
-        PARSE_DATE('%m/%d/%Y', Schedule_Date) AS Schedule_Date,
+        PARSE_DATE('%Y-%m-%d', CAST(Schedule_Date AS STRING)) AS Schedule_Date,
         Schedule_Time,
         Duration,
         Staffs
