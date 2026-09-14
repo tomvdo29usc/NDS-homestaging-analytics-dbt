@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: int_pivot_schedules
+    description: Intermediate pivoted schedule model that collapses multiple schedule rows per order into a single row with key scheduling milestones.
+
+    columns:
+      - name: Order_ID
+        description: unique order identifier used to group schedule records
+        data_tests:
+          - not_null
+
+      - name: Walkthru_DateTime
+        description: datetime of the most recent walkthrough schedule for the order
+
+      - name: PicknLoad_Datetime
+        description: datetime of the most recent pick and load schedule for the order
+
+      - name: Staging_Datetime
+        description: datetime of the most recent staging schedule for the order
+
+      - name: SupplStaging_Datetime
+        description: datetime of the most recent supplemental staging schedule for the order
+
+      - name: Pickup_Datetime
+        description: datetime of the most recent destaging or pickup schedule for the order

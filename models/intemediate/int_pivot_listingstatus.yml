@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: int_pivot_listingstatus
+    description: Intermediate listing status model aggregated by MLS with first/last status dates and pricing milestones from the Listing_History source.
+
+    columns:
+      - name: MLS
+        description: MLS number used to group listing history events
+        data_tests:
+          - not_null
+          - unique
+
+      - name: Listing_First_Active
+        description: first date the listing became active
+
+      - name: Listing_First_Contingent
+        description: first date the listing entered a contingent state
+
+      - name: Listing_First_Pending
+        description: first date the listing entered a pending state
+
+      - name: Listing_Relisted
+        description: most recent relisting date, if applicable
+
+      - name: Listing_Last_Contingent
+        description: most recent contingent date for the listing
+
+      - name: Listing_Last_Pending
+        description: most recent pending date for the listing
+
+      - name: Listing_Last_PriceChanged
+        description: most recent date a price change was recorded
+
+      - name: Listing_Sold
+        description: first sold date for the listing
+
+      - name: First_Listed_Price
+        description: initial listing price when the home was first listed
+
+      - name: Pre_Relisted_Price
+        description: price immediately before relisting, falling back to the first listed price when no relist occurred
+
+      - name: Last_Asked_Price
+        description: latest asking price captured in the listing history
+
+      - name: Sold_Price
+        description: sale price recorded when the listing was sold

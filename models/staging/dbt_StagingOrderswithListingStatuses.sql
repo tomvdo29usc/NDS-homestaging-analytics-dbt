@@ -1,62 +1,5 @@
 {{ config(materialized='view') }}
 
-WITH statuses AS (
-  SELECT
-    MLS,
-
-    (SELECT MAX(Date) FROM UNNEST(events) WHERE Event = 'Listed') AS Listing_First_Active,
-
-    (SELECT MIN(Date) FROM UNNEST(events) WHERE Event = 'Contingent') AS Listing_First_Contingent,
-
-    (SELECT MIN(Date) FROM UNNEST(events) WHERE Event = 'Pending') AS Listing_First_Pending,
-
-    (SELECT MAX(Date) FROM UNNEST(events) WHERE Event = 'Relisted') AS Listing_Relisted,
-
-    (SELECT MAX(Date) FROM UNNEST(events) WHERE Event = 'Contingent') AS Listing_Last_Contingent,
-
-    (SELECT MAX(Date) FROM UNNEST(events) WHERE Event = 'Pending') AS Listing_Last_Pending,
-
-    (SELECT MAX(Date) FROM UNNEST(events) WHERE Event = 'Price Changed') AS Listing_Last_PriceChanged,
-
-    (SELECT MIN(Date) FROM UNNEST(events) WHERE Event = 'Sold') AS Listing_Sold,
-
-    CAST((SELECT Price FROM UNNEST(events)
-     WHERE Event = 'Listed'
-     ORDER BY Date ASC
-     LIMIT 1) AS INT64) AS First_Listed_Price,
-
-     CAST((
-      SELECT Price
-      FROM UNNEST(events)
-      WHERE Event IN ('Listed', 'Price Changed')
-        AND Date < (
-          SELECT MAX(Date)
-          FROM UNNEST(events)
-          WHERE Event = 'Relisted'
-        )
-      ORDER BY Date DESC
-      LIMIT 1
-    ) AS INT64) AS Pre_Relisted_Price,
-
-    CAST((SELECT Price FROM UNNEST(events)
-     WHERE Event IN ('Price Changed', 'Listed')
-     ORDER BY Date DESC
-     LIMIT 1) AS INT64) AS Last_Asked_Price,
-
-    (SELECT Price FROM UNNEST(events)
-     WHERE Event = 'Sold'
-     ORDER BY Date ASC
-     LIMIT 1) AS Sold_Price
-
-  FROM (
-    SELECT
-      MLS,
-      ARRAY_AGG(STRUCT(Date, Event, Price) ORDER BY Date ASC) AS events
-    FROM {{ source('StagingOrders', 'Listing_History') }}
-    GROUP BY MLS
-  )
-)
-
 SELECT
     ord.Order_ID,
     ord.Request_Submitted,
@@ -102,12 +45,12 @@ SELECT
     Last_Asked_Price,
     CAST(sts.Sold_Price AS INT64) AS Sold_Price,
     (   SELECT SUM(First_Listed_Price) 
-        FROM statuses 
+        FROM {{ ref('int_pivot_listingstatus') }}
         WHERE Listing_First_Active = (SELECT MAX(Listing_First_Active) 
-                                      FROM statuses)) 
+                                      FROM {{ ref('int_pivot_listingstatus') }})) 
             AS most_recent_First_Listed_Price
 FROM {{ source('StagingOrders', 'Orders') }} AS ord
-LEFT JOIN statuses AS sts
+LEFT JOIN {{ ref('int_pivot_listingstatus') }} AS sts
     ON ord.MLS = sts.MLS
 LEFT JOIN {{ source('StagingOrders', 'Proposal') }} proposal
   ON ord.Order_ID = proposal.Order_ID
