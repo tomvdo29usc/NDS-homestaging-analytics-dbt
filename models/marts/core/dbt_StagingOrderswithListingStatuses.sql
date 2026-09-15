@@ -1,4 +1,4 @@
-{{ config(materialized='view') }}
+{{ config(materialized='table') }}
 
 SELECT
     ord.Order_ID,
@@ -49,9 +49,8 @@ SELECT
         WHERE Listing_First_Active = (SELECT MAX(Listing_First_Active) 
                                       FROM {{ ref('int_pivot_listingstatus') }})) 
             AS most_recent_First_Listed_Price
-FROM {{ source('StagingOrders', 'Orders') }} AS ord
+FROM {{ ref('stg_orders') }} AS ord
 LEFT JOIN {{ ref('int_pivot_listingstatus') }} AS sts
     ON ord.MLS = sts.MLS
 LEFT JOIN {{ source('StagingOrders', 'Proposal') }} proposal
   ON ord.Order_ID = proposal.Order_ID
-WHERE Client_Name <> "Tom Do"
