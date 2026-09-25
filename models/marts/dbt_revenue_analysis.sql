@@ -10,7 +10,7 @@ SELECT
        WHEN Schedule_Staging_Date IS NULL AND Status = "Archived" THEN DATE(Proposal_ClosedDate) ELSE CURRENT_DATE() END AS date_revenue,
   CASE WHEN Schedule_Staging_Date IS NOT NULL THEN Payment_Amount END AS Earning_Amount, 
   CASE WHEN Schedule_Staging_Date IS NULL AND Status = "Inquiry" THEN Payment_Amount ELSE 0 END AS OutstandingQuote_Amount,
-  CASE WHEN Schedule_Staging_Date IS NULL AND Status = "Staging Scheduling" THEN Payment_Amount END AS PendingEarning_Amount,
+  CASE WHEN Schedule_Staging_Date IS NULL AND Status = "Staging Scheduling" THEN Payment_Amount ELSE 0 END AS PendingEarning_Amount,
   CASE WHEN Schedule_Staging_Date IS NULL AND Status = "Archived" THEN -Payment_Amount END AS Lost_Revenue 
 
 FROM {{ ref('dbt_StagingOrderswithListingStatuses') }}
