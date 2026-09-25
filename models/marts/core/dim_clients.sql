@@ -22,8 +22,8 @@ SELECT
             ORDER BY LENGTH(Client_Name), Client_Name
             LIMIT 1)[OFFSET(0)] AS Client_Name,
 
-  STRING_AGG(Client_Email, ', ') AS Client_Emails,
-  STRING_AGG(Client_Name, ', ') AS Client_Names
+  STRING_AGG(DISTINCT Client_Email, ', ') AS Client_Emails,
+  STRING_AGG(DISTINCT Client_Name, ', ') AS Client_Names
 
 FROM distinct_clients
 GROUP BY Client_ID, Client_Phone
