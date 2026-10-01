@@ -64,6 +64,7 @@ WITH
         SELECT
           MLS, ARRAY_AGG(STRUCT(Date, Event, Price) ORDER BY Date ASC) AS events
         FROM {{ source('StagingOrders', 'Listing_History') }}
+        WHERE MLS IS NOT NULL AND Date IS NOT NULL AND Event IS NOT NULL
         GROUP BY MLS
       )
     CROSS JOIN UNNEST(events) AS e
