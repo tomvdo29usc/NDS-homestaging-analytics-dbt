@@ -55,5 +55,5 @@ LEFT JOIN {{ ref('int_pivot_listingstatus') }} AS sts
     ON ord.MLS = sts.MLS
 LEFT JOIN {{ source('StagingOrders', 'Proposal') }} proposal
   ON ord.Order_ID = proposal.Order_ID
-LEFT JOIN {{ source('StagingOrders', 'dim_clients') }} clients
+LEFT JOIN {{ ref('dim_clients') }} clients
   ON ord.Client_ID = clients.Client_ID
