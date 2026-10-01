@@ -3,7 +3,7 @@
 SELECT
     ord.Order_ID,
     ord.Request_Submitted,
-    ord.Client_ID
+    ord.Client_ID,
     clients.Client_Name,
     ord.Property_Address,
     ord.Property_Description,
