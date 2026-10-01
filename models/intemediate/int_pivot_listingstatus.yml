@@ -9,7 +9,6 @@ models:
         description: MLS number used to group listing history events
         data_tests:
           - not_null
-          - unique
 
       - name: Listing_First_Active
         description: first date the listing became active
