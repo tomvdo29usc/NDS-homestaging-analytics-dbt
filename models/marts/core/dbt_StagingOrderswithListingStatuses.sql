@@ -3,7 +3,8 @@
 SELECT
     ord.Order_ID,
     ord.Request_Submitted,
-    ord.Client_Name,
+    ord.Client_ID
+    clients.Client_Name,
     ord.Property_Address,
     ord.Property_Description,
     ord.Media_Request,
@@ -54,3 +55,5 @@ LEFT JOIN {{ ref('int_pivot_listingstatus') }} AS sts
     ON ord.MLS = sts.MLS
 LEFT JOIN {{ source('StagingOrders', 'Proposal') }} proposal
   ON ord.Order_ID = proposal.Order_ID
+LEFT JOIN {{ source('StagingOrders', 'dim_client') }} clients
+  ON ord.Client_ID = clients.Client_ID

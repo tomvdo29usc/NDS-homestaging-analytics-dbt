@@ -13,6 +13,11 @@ models:
         description: Date and time a staging inquiry was submitted by user
         data_tests:
           - not_null
+        
+      - name: Client_ID
+        description: ID of the client submiited the inquiry
+        data_tests:
+          - not_null
 
       - name: Client_Name
         description: Name of the client submiited the inquiry
